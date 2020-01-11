@@ -5,7 +5,7 @@ import 'creators/components-creator.dart';
 import 'creators/simple-button-creator.dart';
 import 'design/desginConstants.dart';
 
-class Bedroom extends StatelessWidget {
+class Kidsroom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -38,17 +38,17 @@ class Bedroom extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Image(
-                  image: AssetImage("images/bed.png"),
+                  image: AssetImage("images/bear.png"),
                 ),
                 Text(
-                  "Bedroom",
+                  "Kids room",
                   style: TextStyle(
                     fontSize: 50,
                     color: Colors.white,
                   ),
                 ),
                 Text(
-                  "2 devices",
+                  "2 device",
                   style: TextStyle(
                       fontSize: 20,
                       color: Colors.white,

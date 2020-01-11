@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
-import '../desginConstants.dart';
+import '../design/desginConstants.dart';
 
 class ComponentsCreator extends StatelessWidget {
 
-  final IconData icone;
   final String contenu;
-  ComponentsCreator({this.icone,this.contenu});
+  final String valeur;
+  final String photo;
+  ComponentsCreator({this.contenu,this.valeur,this.photo});
 
   @override
   Widget build(BuildContext context) {
@@ -19,21 +20,32 @@ class ComponentsCreator extends StatelessWidget {
         ),
         onPressed: () {},
         child: Container(
-          height: 140,
-          width: 120,
+          height: 160,
+          width: 140,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Icon(
-                icone,
-                color: Colors.white,
-                size: 50,
-              ),
               Text(
                 contenu,
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 30,
+                  fontSize: 24,
+                  fontWeight: FontWeight.w200
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Image(
+                  width: 60,
+                  image: AssetImage("$photo"),
+                  color: Colors.grey,
+                ),
+              ),
+              Text(
+                valeur,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
                 ),
               ),
             ],

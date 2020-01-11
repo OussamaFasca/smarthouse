@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'creators/components-creator.dart';
 import 'creators/simple-button-creator.dart';
-import 'desginConstants.dart';
+import 'design/desginConstants.dart';
 
 class LivingRoom extends StatelessWidget {
   @override
@@ -40,38 +40,36 @@ class LivingRoom extends StatelessWidget {
                 Image(
                   image: AssetImage("images/sofa.png"),
                 ),
-                SizedBox(
-                  height: 20,
-                ),
                 Text(
-                  "Living Room",
+                  "Livingroom",
                   style: TextStyle(
                     fontSize: 50,
                     color: Colors.white,
                   ),
                 ),
                 Text(
-                  "4 devices enabled",
+                  "4 devices",
                   style: TextStyle(
                       fontSize: 20,
                       color: Colors.white,
                       fontWeight: FontWeight.w200),
                 ),
                 SizedBox(
-                  height: 50,
+                  height: 20,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    ComponentsCreator(icone: Icons.lightbulb_outline,contenu: "OFF",),
-                    ComponentsCreator(icone: Icons.sentiment_satisfied,contenu: "25",),
+                    ComponentsCreator(contenu: "Light",valeur: "Off",photo: "images/idea.png",),
+                    //ComponentsCreator(contenu: "Humidity",valeur: "80%",photo: "images/humidity.png",),
+                    ComponentsCreator(contenu: "Temperature",valeur: "25",photo: "images/hot.png",),
                   ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    ComponentsCreator(icone: Icons.developer_mode,contenu: "CLOSED",),
-                    ComponentsCreator(icone: Icons.star,contenu: "Running",),
+                    ComponentsCreator(contenu: "Fan",valeur: "Running",photo: "images/fan.png",),
+                    ComponentsCreator(contenu: "Door",valeur: "Opened",photo: "images/door.png",),
                   ],
                 ),
               ],

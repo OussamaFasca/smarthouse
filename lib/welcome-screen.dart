@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:smart_house/desginConstants.dart';
+import 'package:smart_house/design/desginConstants.dart';
 import 'package:smart_house/main.dart';
 import 'creators/frame-creator.dart';
 import 'creators/simple-button-creator.dart';
@@ -56,7 +56,9 @@ class WelcomeScreen extends StatelessWidget {
                     FrameCreator(
                       photo: "images/kitchen.png",
                       contenu: "Kitchen",
-                      fonction: () {},
+                      fonction: () {
+                        Navigator.pushNamed(context, MainScreen.id[2]);
+                      },
                     ),
                   ],
                 ),
@@ -69,12 +71,16 @@ class WelcomeScreen extends StatelessWidget {
                     FrameCreator(
                       photo: "images/growth.png",
                       contenu: "Garden",
-                      fonction: () {},
+                      fonction: () {
+                        Navigator.pushNamed(context, MainScreen.id[3]);
+                      },
                     ),
                     FrameCreator(
                       photo: "images/bed.png",
                       contenu: "Bedroom",
-                      fonction: () {},
+                      fonction: () {
+                        Navigator.pushNamed(context, MainScreen.id[4]);
+                      },
                     ),
                   ],
                 ),
@@ -85,14 +91,18 @@ class WelcomeScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
                     FrameCreator(
-                      photo: "images/toilet.png",
-                      contenu: "Bathroom",
-                      fonction: () {},
+                      photo: "images/bear.png",
+                      contenu: "Kids room",
+                      fonction: () {
+                        Navigator.pushNamed(context, MainScreen.id[5]);
+                      },
                     ),
                     FrameCreator(
                       photo: "images/meetingroom.png",
-                      contenu: "Guest Room",
-                      fonction: () {},
+                      contenu: "Guests room",
+                      fonction: () {
+                        Navigator.pushNamed(context, MainScreen.id[6]);
+                      },
                     ),
                   ],
                 ),
