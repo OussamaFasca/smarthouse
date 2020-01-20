@@ -4,6 +4,9 @@ const KolorIOne = Color(0xFF0F2027);
 const KolorTwo = Color(0xFF203A43);
 const KolorThree = Color(0xFF2C5364);
 
+const KolorGrey = Color(0xFF808080);
+const KolorYellow = Color(0xFFf2f542);
+
 const MyGradient = LinearGradient(
   begin: Alignment.topCenter,
   end: Alignment.bottomCenter,

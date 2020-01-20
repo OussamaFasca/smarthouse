@@ -1,11 +1,55 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:smart_house/Firebase/real-time-database.dart';
+import 'package:smart_house/design/loading-screen.dart';
 import 'creators/components-creator.dart';
 import 'creators/simple-button-creator.dart';
 import 'design/desginConstants.dart';
 
-class LivingRoom extends StatelessWidget {
+class LivingRoom extends StatefulWidget {
+  @override
+  _LivingRoomState createState() => _LivingRoomState();
+}
+
+class _LivingRoomState extends State<LivingRoom> {
+
+  //mes objets
+  final firebaseController = Realtime();
+  LoadingScreen loadingscreen = LoadingScreen();
+
+  //mes variables
+  Color KouleurLight= Colors.grey;
+  Color KouleurServo= Colors.grey;
+  bool visibility = false;
+  String RealValueLight = "";
+  String RealValueTemp ="";
+  String RealValueServo="";
+
+  //mes fonctions
+  void testAuxoLight(bool auxo) {
+    if (auxo) {
+      setState(() {
+        KouleurLight = Colors.amberAccent;
+      });
+    } else {
+      setState(() {
+        KouleurLight = Colors.grey;
+      });
+    }
+  }
+  void testAuxoServo(bool auxo) {
+    if (auxo) {
+      setState(() {
+        KouleurServo = Colors.pinkAccent;
+      });
+    } else {
+      setState(() {
+        KouleurServo = Colors.grey;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -57,19 +101,87 @@ class LivingRoom extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
+                SizedBox(
+                  child: Visibility(
+                    child: loadingscreen.spinkitActive,
+                    visible: visibility,
+                  ),
+                  height: 60,
+                  width: 60,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    ComponentsCreator(contenu: "Light",valeur: "Off",photo: "images/idea.png",),
-                    //ComponentsCreator(contenu: "Humidity",valeur: "80%",photo: "images/humidity.png",),
-                    ComponentsCreator(contenu: "Temperature",valeur: "25",photo: "images/hot.png",),
+                    ComponentsCreator(
+                      contenu: "Light",
+                      valeur: RealValueLight,
+                      photo: "images/idea.png",
+                      couleur: KouleurLight,
+                      fonction: () async {
+                        setState(() {
+                          visibility = true;
+                        });
+                        bool auxo = await firebaseController.syncData("Light","Off","On");
+                        String auxi = await firebaseController.getData("Light");
+                        setState(() {
+                          RealValueLight = auxi;
+                          testAuxoLight(auxo);
+                          visibility = false;
+                        });
+                      },
+                    ),
+                    ComponentsCreator(
+                      contenu: "Temperature",
+                      valeur: RealValueTemp,
+                      photo: "images/hot.png",
+                      couleur: Colors.orangeAccent,
+                      fonction: () async {
+                        setState(() {
+                          visibility = true;
+                        });
+                        String auxi = await firebaseController.getData("Temperature");
+                        setState(() {
+                          RealValueTemp = auxi;
+                          visibility = false;
+                        });
+                      },
+                    ),
                   ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    ComponentsCreator(contenu: "Fan",valeur: "Running",photo: "images/fan.png",),
-                    ComponentsCreator(contenu: "Door",valeur: "Opened",photo: "images/door.png",),
+                    ComponentsCreator(
+                      contenu: "Fan",
+                      valeur: "Running",
+                      photo: "images/fan.png",
+                    ),
+                    ComponentsCreator(
+                      contenu: "Door",
+                      valeur: RealValueServo,
+                      photo: "images/door.png",
+                      couleur: KouleurServo,
+                      fonction: () async {
+                        setState(() {
+                          visibility = true;
+                        });
+                        bool auxo = await firebaseController.syncData("Servo","180","90");
+                        String auxi = await firebaseController.getData("Servo");
+                        if(auxi == "180")
+                          {
+                            auxi="Closed";
+                          }
+                        else
+                          {
+                            auxi="Opened";
+                          }
+                        setState(() {
+                          RealValueServo = auxi;
+                          testAuxoServo(auxo);
+                          visibility = false;
+                        });
+                      },
+                    ),
                   ],
                 ),
               ],
@@ -80,4 +192,3 @@ class LivingRoom extends StatelessWidget {
     );
   }
 }
-

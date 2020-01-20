@@ -7,7 +7,9 @@ class ComponentsCreator extends StatelessWidget {
   final String contenu;
   final String valeur;
   final String photo;
-  ComponentsCreator({this.contenu,this.valeur,this.photo});
+  final Function fonction;
+  final Color couleur;
+  ComponentsCreator({this.contenu,this.valeur,this.photo,this.fonction,this.couleur});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,7 @@ class ComponentsCreator extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
         ),
-        onPressed: () {},
+        onPressed: fonction,
         child: Container(
           height: 160,
           width: 140,
@@ -38,7 +40,7 @@ class ComponentsCreator extends StatelessWidget {
                 child: Image(
                   width: 60,
                   image: AssetImage("$photo"),
-                  color: Colors.grey,
+                  color: couleur,
                 ),
               ),
               Text(

@@ -1,16 +1,18 @@
 import 'dart:io';
-
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_house/design/desginConstants.dart';
 import 'package:smart_house/main.dart';
 import 'creators/frame-creator.dart';
 import 'creators/simple-button-creator.dart';
 
-class WelcomeScreen extends StatelessWidget {
-  const WelcomeScreen({
-    Key key,
-  }) : super(key: key);
 
+class WelcomeScreen extends StatefulWidget {
+  @override
+  _WelcomeScreenState createState() => _WelcomeScreenState();
+}
+
+class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -39,8 +41,34 @@ class WelcomeScreen extends StatelessWidget {
             gradient: MyGradient,
           ),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
+              SizedBox(
+                width: 250.0,
+                child: ColorizeAnimatedTextKit(
+                    onTap: () {
+                      print("Tap Event");
+                    },
+                    text: [
+                      "Welcome To",
+                      "Faskoub"
+                    ],
+                    textStyle: TextStyle(
+                      fontSize: 45.0,
+                      fontFamily: "Horizon",
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.w200,
+                    ),
+                    colors: [
+                      Colors.white,
+                      Colors.purpleAccent,
+                      Colors.deepPurple,
+                      Colors.tealAccent,
+                    ],
+                    textAlign: TextAlign.center,
+                    alignment: AlignmentDirectional.topStart // or Alignment.topLeft
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20),
                 child: Row(
@@ -114,3 +142,5 @@ class WelcomeScreen extends StatelessWidget {
     );
   }
 }
+
+

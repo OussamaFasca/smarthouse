@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "332986819906",
+    "firebase_url": "https://smart-house-c1eec.firebaseio.com",
+    "project_id": "smart-house-c1eec",
+    "storage_bucket": "smart-house-c1eec.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:332986819906:android:8e1f0591712bc499cfd4db",
+        "android_client_info": {
+          "package_name": "com.oussamafasca.smart_house"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "332986819906-8q9bb4cok36v1l0ql5th5643cd9ihqoc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOLbvjBDX7y9UuKvJ9NJYFP84twzr3qrw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "332986819906-8q9bb4cok36v1l0ql5th5643cd9ihqoc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
