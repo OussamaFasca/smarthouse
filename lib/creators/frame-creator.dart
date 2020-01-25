@@ -10,28 +10,28 @@ class FrameCreator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FlatButton(
-      padding: EdgeInsets.all(20),
+      padding: EdgeInsets.all(16),
       shape: RoundedRectangleBorder(
         side: BorderSide(
           width: 0.5,
           color: Colors.white,
         ),
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(10),
       ),
       onPressed: fonction,
       child: Column(
         children: <Widget>[
           Image(
-            width: 100,
+            width: 90,
             image: AssetImage("$photo"),
           ),
           SizedBox(
-            height: 15,
+            height: 10,
           ),
           Text(
             "$contenu",
             style: TextStyle(
-              fontSize: 18,
+              fontSize: 16,
               color: Colors.white,
             ),
           ),

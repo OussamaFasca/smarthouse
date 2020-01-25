@@ -22,8 +22,8 @@ class ComponentsCreator extends StatelessWidget {
         ),
         onPressed: fonction,
         child: Container(
-          height: 160,
-          width: 140,
+          height: 140,
+          width: 120,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -31,14 +31,14 @@ class ComponentsCreator extends StatelessWidget {
                 contenu,
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 24,
+                  fontSize: 20,
                   fontWeight: FontWeight.w200
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Image(
-                  width: 60,
+                  width: 50,
                   image: AssetImage("$photo"),
                   color: couleur,
                 ),
@@ -47,7 +47,7 @@ class ComponentsCreator extends StatelessWidget {
                 valeur,
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 24,
+                  fontSize: 20,
                 ),
               ),
             ],

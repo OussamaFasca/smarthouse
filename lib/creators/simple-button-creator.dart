@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_house/design/desginConstants.dart';
 
 class SimpleButtonCreator extends StatelessWidget {
 
@@ -10,6 +11,7 @@ class SimpleButtonCreator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FlatButton(
+      color: KolorTwo,
       shape: RoundedRectangleBorder(
         side: BorderSide(
           width: 1,

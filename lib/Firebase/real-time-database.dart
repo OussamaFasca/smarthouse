@@ -1,37 +1,50 @@
 import 'package:firebase_database/firebase_database.dart';
 
+
 class Realtime {
 
   final DBref = FirebaseDatabase.instance.reference();
 
-  void writeData(String composant, String valeur) async
+
+  Stream<String> ListnerData()
   {
-    await DBref.child(composant).set({
-      'etat_$composant' : '$valeur'
+     DBref.child("LivingRoom").onChildChanged.listen((Event event){
+      DataSnapshot snapshot=event.snapshot;
+      print("change false : ${snapshot.value}");
+      return snapshot.value;
+    });
+
+  }
+
+
+
+  void writeData(String room,String composant ,String valeur) async
+  {
+    await DBref.child(room).update({
+      '$composant' : '$valeur'
     });
   }
 
-  Future<String> getData(String composant) async
+  Future<String> getData(String room,String composant) async
   {
-    String result= (await DBref.child("$composant/etat_$composant").once()).value;
+    String result= (await DBref.child("$room/$composant").once()).value;
     print(result);
     return result;
   }
 
-  Future<bool> syncData(String composant,String LowValue,String HighValue) async
+  Future<bool> syncData(String room,String composant,String LowValue,String HighValue) async
   {
-    String aux = await getData(composant);
+    String aux = await getData(room,composant);
     if(aux == LowValue) // tester if off
     {
-      writeData(composant, HighValue); // passer On
+      writeData(room, composant,HighValue); // passer On
       return true;
     }
     else
     {
-      writeData(composant, LowValue); // passer off
+      writeData(room, composant,LowValue); // passer off
       return false;
     }
   }
-
 
 }

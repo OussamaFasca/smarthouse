@@ -1,11 +1,10 @@
-import 'dart:io';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_house/design/desginConstants.dart';
 import 'package:smart_house/main.dart';
+import 'creators/AlertCreator.dart';
 import 'creators/frame-creator.dart';
 import 'creators/simple-button-creator.dart';
-
 
 class WelcomeScreen extends StatefulWidget {
   @override
@@ -22,15 +21,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           backgroundColor: KolorIOne,
           elevation: 0,
           title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
               SimpleButtonCreator(
-                icone: Icons.arrow_back,
-                fonction: () => Navigator.pop(context),
-              ),
-              SimpleButtonCreator(
                 icone: Icons.close,
-                fonction: () => exit(0),
+                fonction: () => CreateAlertDialog(context),
               ),
             ],
           ),
@@ -41,23 +36,17 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             gradient: MyGradient,
           ),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               SizedBox(
                 width: 250.0,
                 child: ColorizeAnimatedTextKit(
-                    onTap: () {
-                      print("Tap Event");
-                    },
-                    text: [
-                      "Welcome To",
-                      "Faskoub"
-                    ],
+                    text: ["Smart", "House"],
                     textStyle: TextStyle(
                       fontSize: 45.0,
                       fontFamily: "Horizon",
                       fontStyle: FontStyle.italic,
-                      fontWeight: FontWeight.w200,
+                      fontWeight: FontWeight.w300,
                     ),
                     colors: [
                       Colors.white,
@@ -66,8 +55,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       Colors.tealAccent,
                     ],
                     textAlign: TextAlign.center,
-                    alignment: AlignmentDirectional.topStart // or Alignment.topLeft
-                ),
+                    alignment:
+                        AlignmentDirectional.topStart // or Alignment.topLeft
+                    ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20),
@@ -141,6 +131,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       ),
     );
   }
+
+
 }
-
-
