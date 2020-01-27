@@ -25,7 +25,6 @@ class _LivingRoomState extends State<LivingRoom> {
   Color KouleurFan = Colors.grey;
 
   bool visibility = false;
-  bool listner = false;
 
   //Real Values
   String RealValueLight = "";
@@ -126,7 +125,6 @@ class _LivingRoomState extends State<LivingRoom> {
                         photo: "images/hot.png",
                         couleur: Colors.orangeAccent,
                         fonction: ()=> showToast(context),
-
                       )
                     ],
                   ),
@@ -233,14 +231,6 @@ class _LivingRoomState extends State<LivingRoom> {
     });
   }
 
-  Future NetworkingTemp() async {
-    String auxi = await firebaseController.getData("LivingRoom", "Temperature");
-    setState(() {
-      RealValueTemp = auxi;
-      visibility = false;
-    });
-  }
-
   Future NetworkingLight() async {
     bool auxo = await firebaseController.syncData("LivingRoom", "Light", "Off", "On");
     String auxi = await firebaseController.getData("LivingRoom", "Light");
@@ -258,7 +248,7 @@ class _LivingRoomState extends State<LivingRoom> {
       visibility = true;
     });
     String Light = await firebaseController.getData("LivingRoom", "Light");
-    String Temp = await firebaseController.getData("LivingRoom", "Temperature");
+    String Temp = await firebaseController.getData("General", "Temperature");
     String Servo = await firebaseController.getData("LivingRoom", "Servo");
     String Fan = await firebaseController.getData("LivingRoom", "Fan");
     if (Servo == "180") {
@@ -297,7 +287,7 @@ class _LivingRoomState extends State<LivingRoom> {
     Color Kouleurservo = Colors.grey;
 
     String Light = await firebaseController.getData("LivingRoom", "Light");
-    String Temp = await firebaseController.getData("LivingRoom", "Temperature");
+    String Temp = await firebaseController.getData("General", "Temperature");
     String Servo = await firebaseController.getData("LivingRoom", "Servo");
     String Fan = await firebaseController.getData("LivingRoom", "Fan");
     if (Servo == "180") {

@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_house/creators/AlertCreator.dart';
@@ -260,13 +259,6 @@ class _KitchenState extends State<Kitchen>  {
     });
   }
 
-  Future NetworkingTemp() async {
-    String auxi = await firebaseController.getData("Kitchen","Temperature");
-    setState(() {
-      RealValueTemp = auxi;
-      visibility = false;
-    });
-  }
 
   Future NetworkingLight() async {
     bool auxo = await firebaseController.syncData("Kitchen","Light","Off","On");
@@ -286,7 +278,7 @@ class _KitchenState extends State<Kitchen>  {
       visibility = true;
     });
     String Light = await firebaseController.getData("Kitchen","Light");
-    String Temp = await firebaseController.getData("Kitchen","Temperature");
+    String Temp = await firebaseController.getData("General","Temperature");
     String Gas  = await firebaseController.getData("Kitchen","Gas");
     String Buzzer = await firebaseController.getData("Kitchen","Buzzer");
     if(Gas == "No") {Gas="No gas";} else {Gas="Gas !"; Kouleurgas= Colors.lightBlueAccent;}
@@ -329,7 +321,7 @@ class _KitchenState extends State<Kitchen>  {
     Color Kouleurgas = Colors.grey;
 
     String Light = await firebaseController.getData("Kitchen","Light");
-    String Temp = await firebaseController.getData("Kitchen","Temperature");
+    String Temp = await firebaseController.getData("General","Temperature");
     String Gas  = await firebaseController.getData("Kitchen","Gas");
     String Buzzer = await firebaseController.getData("Kitchen","Buzzer");
     if(Gas == "No") {Gas="No gas";} else {Gas="Gas !"; Kouleurgas= Colors.lightBlueAccent;}
