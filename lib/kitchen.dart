@@ -19,6 +19,10 @@ class Kitchen extends StatefulWidget {
 
 class _KitchenState extends State<Kitchen>  {
 
+
+  //buzzer Control
+  bool bizo = true;
+
   //mes objets
   final firebaseController = Realtime();
   LoadingScreen loadingscreen = LoadingScreen();
@@ -46,6 +50,9 @@ class _KitchenState extends State<Kitchen>  {
   void initState(){
     // TODO: implement initState
     NetworkingInit();
+
+    final oneSec = const Duration(seconds: 1);
+    Timer.periodic(oneSec, (Timer t) => NetworkingInitNoAnimation());
 
     super.initState();
   }
@@ -126,6 +133,7 @@ class _KitchenState extends State<Kitchen>  {
                             visibility = true;
                           });
                           await NetworkingLight();
+                          NetworkingInit();
                         },
                       ),
                       ComponentsCreator(
@@ -145,13 +153,7 @@ class _KitchenState extends State<Kitchen>  {
                         valeur: RealValueGas,
                         photo: "images/fire.png",
                         couleur: KouleurGas,
-                        fonction: () async
-                        {
-                          setState(() {
-                            visibility = true;
-                          });
-                          await NetworkingGas();
-                        },
+                        fonction: ()=>showToast(context),
                       ),
                       ComponentsCreator(
                         contenu: "Buzzer",
@@ -159,10 +161,18 @@ class _KitchenState extends State<Kitchen>  {
                         photo: "images/bell.png",
                         couleur: KouleurBuzzer,
                         fonction: () async {
-                          setState(() {
-                            visibility = true;
-                          });
-                          await NetworkingBuzzer();
+                          if(bizo)
+                          {
+                            showToast(context);
+                          }
+                          else
+                            {
+                              setState(() {
+                                visibility = true;
+                              });
+                              await NetworkingBuzzer();
+                              NetworkingInit();
+                            }
                         },
                       ),
                     ],
@@ -211,25 +221,37 @@ class _KitchenState extends State<Kitchen>  {
   }
 
   Future NetworkingBuzzer() async {
-    bool auxo = await firebaseController.syncData("Kitchen","Buzzer","Off","On");
+
     String auxi = await firebaseController.getData("Kitchen","Buzzer");
-    setState(() {
-      RealValueBuzzer = auxi;
-      testAuxoBuzzer(auxo);
-      visibility = false;
-    });
+    if(auxi == "On")
+      {
+        bool auxo = await firebaseController.syncData("Kitchen","Buzzer","Off","On");
+        setState(() {
+          RealValueBuzzer = auxi;
+          testAuxoBuzzer(auxo);
+          visibility = false;
+        });
+      }
+    else
+      {
+        bizo = true;
+        print("kkkkkkkkkkkkkkkkkkkkkkkk");
+      }
+
   }
 
   Future NetworkingGas() async {
-    bool auxo = await firebaseController.syncData("Kitchen","Gas","No","Yes");
+    bool auxo;
     String auxi = await firebaseController.getData("Kitchen","Gas");
     if(auxi == "No")
     {
       auxi="No gas";
+      auxo = true;
     }
     else
     {
       auxi="Gas !";
+      auxo = false;
     }
     setState(() {
       RealValueGas = auxi;
@@ -268,6 +290,14 @@ class _KitchenState extends State<Kitchen>  {
     String Gas  = await firebaseController.getData("Kitchen","Gas");
     String Buzzer = await firebaseController.getData("Kitchen","Buzzer");
     if(Gas == "No") {Gas="No gas";} else {Gas="Gas !"; Kouleurgas= Colors.lightBlueAccent;}
+    if(Buzzer == "On")
+      {
+        bizo = false;
+      }
+    else
+      {
+        bizo = true;
+      }
 
 
     setState(() {
@@ -292,6 +322,37 @@ class _KitchenState extends State<Kitchen>  {
     {
       return false;
     }
+  }
+
+  void NetworkingInitNoAnimation() async {
+
+    Color Kouleurgas = Colors.grey;
+
+    String Light = await firebaseController.getData("Kitchen","Light");
+    String Temp = await firebaseController.getData("Kitchen","Temperature");
+    String Gas  = await firebaseController.getData("Kitchen","Gas");
+    String Buzzer = await firebaseController.getData("Kitchen","Buzzer");
+    if(Gas == "No") {Gas="No gas";} else {Gas="Gas !"; Kouleurgas= Colors.lightBlueAccent;}
+    if(Buzzer == "On")
+    {
+      bizo = false;
+    }
+    else
+    {
+      bizo = true;
+    }
+
+
+    setState(() {
+      testAuxoLight(convertToBool(Light, "On"));
+      testAuxoBuzzer(convertToBool(Buzzer, "On"));
+      testAuxoGas(convertToBool(Gas, "Yes"));
+      KouleurGas = Kouleurgas ;
+      RealValueBuzzer = Buzzer;
+      RealValueGas = Gas;
+      RealValueLight = Light;
+      RealValueTemp = Temp;
+    });
   }
 
 

@@ -38,7 +38,7 @@ class _LivingRoomState extends State<LivingRoom> {
   void initState() {
     // TODO: implement initState
     NetworkingInit();
-    final oneSec = const Duration(seconds: 1);
+    final oneSec = const Duration(seconds: 2);
     Timer.periodic(oneSec, (Timer t) => NetworkingInitNoAnimation());
 
     super.initState();
@@ -117,6 +117,7 @@ class _LivingRoomState extends State<LivingRoom> {
                             visibility = true;
                           });
                           await NetworkingLight();
+                          NetworkingInit();
                         },
                       ),
                       ComponentsCreator(
@@ -142,6 +143,7 @@ class _LivingRoomState extends State<LivingRoom> {
                             visibility = true;
                           });
                           await NetworkingFan();
+                          NetworkingInit();
                         },
                       ),
                       ComponentsCreator(
@@ -154,6 +156,7 @@ class _LivingRoomState extends State<LivingRoom> {
                             visibility = true;
                           });
                           await NetworkingDoor();
+                          NetworkingInit();
                         },
                       ),
                     ],
@@ -239,8 +242,7 @@ class _LivingRoomState extends State<LivingRoom> {
   }
 
   Future NetworkingLight() async {
-    bool auxo =
-        await firebaseController.syncData("LivingRoom", "Light", "Off", "On");
+    bool auxo = await firebaseController.syncData("LivingRoom", "Light", "Off", "On");
     String auxi = await firebaseController.getData("LivingRoom", "Light");
     setState(() {
       RealValueLight = auxi;
@@ -279,12 +281,16 @@ class _LivingRoomState extends State<LivingRoom> {
     });
   }
 
-  bool convertToBool(String etat, String High) {
-    if (etat == High) {
+  bool convertToBool(String etat, String High)
+  {
+    if (etat == High)
+    {
       return true;
-    } else {
-      return false;
     }
+    else
+      {
+      return false;
+      }
   }
 
   void NetworkingInitNoAnimation() async {

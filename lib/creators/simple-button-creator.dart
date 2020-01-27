@@ -10,20 +10,21 @@ class SimpleButtonCreator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FlatButton(
+    return MaterialButton(
+      height: 40,
       color: KolorTwo,
       shape: RoundedRectangleBorder(
         side: BorderSide(
           width: 1,
           color: Colors.white,
         ),
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(10),
       ),
       onPressed: fonction,
       child: Icon(
         icone,
         color: Colors.white,
-        size: 30,
+        size: 25,
       ),
     );
   }
