@@ -124,7 +124,7 @@ class _KidsroomState extends State<Kidsroom> {
                         valeur: RealValueTemp,
                         photo: "images/hot.png",
                         couleur: Colors.orangeAccent,
-                        fonction: ()=> showToast(context),
+                        fonction: ()=> showToast(context,"What do you expect me to do ?","Sorry"),
 
                       )
                     ],

@@ -124,7 +124,7 @@ class _GuestState extends State<Guest> {
                         valeur: RealValueTemp,
                         photo: "images/hot.png",
                         couleur: Colors.orangeAccent,
-                        fonction: ()=> showToast(context),
+                        fonction: ()=> showToast(context,"What do you expect me to do ?","Sorry"),
 
                       )
                     ],
@@ -151,8 +151,8 @@ class _GuestState extends State<Guest> {
   }
 
   Future NetworkingLight() async {
-    bool auxo = await firebaseController.syncData("Guest", "Light", "Off", "On");
-    String auxi = await firebaseController.getData("Guest", "Light");
+    bool auxo = await firebaseController.syncData("GuestsRoom", "Light", "Off", "On");
+    String auxi = await firebaseController.getData("GuestsRoom", "Light");
     setState(() {
       RealValueLight = auxi;
       testAuxoLight(auxo);
@@ -165,7 +165,7 @@ class _GuestState extends State<Guest> {
     setState(() {
       visibility = true;
     });
-    String Light = await firebaseController.getData("Guest", "Light");
+    String Light = await firebaseController.getData("GuestsRoom", "Light");
     String Temp = await firebaseController.getData("General", "Temperature");
 
     setState(() {
@@ -190,7 +190,7 @@ class _GuestState extends State<Guest> {
 
   void NetworkingInitNoAnimation() async {
 
-    String Light = await firebaseController.getData("Guest", "Light");
+    String Light = await firebaseController.getData("GuestsRoom", "Light");
     String Temp = await firebaseController.getData("General", "Temperature");
 
     setState(() {

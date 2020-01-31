@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
-void showToast(BuildContext context) {
+void showToast(BuildContext context,String Contenu,String buttonName) {
+
   final scaffold = Scaffold.of(context);
   scaffold.showSnackBar(
     SnackBar(
       content: Text(
-        "What do you expect me to do ?",
+        Contenu,
       ),
       action: SnackBarAction(
-        label: "Sorry",
+        label: buttonName,
         onPressed: scaffold.hideCurrentSnackBar,
       ),
     ),

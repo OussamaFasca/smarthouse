@@ -47,6 +47,7 @@ class _KitchenState extends State<Kitchen>  {
   //initil state
   @override
   void initState(){
+
     // TODO: implement initState
     NetworkingInit();
 
@@ -55,9 +56,6 @@ class _KitchenState extends State<Kitchen>  {
 
     super.initState();
   }
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -140,7 +138,7 @@ class _KitchenState extends State<Kitchen>  {
                         valeur: RealValueTemp,
                         photo: "images/hot.png",
                         couleur: Colors.orangeAccent,
-                        fonction: ()=>showToast(context),
+                        fonction: ()=>showToast(context,"What do you expect me to do ?","Sorry"),
                       )
                     ],
                   ),
@@ -152,7 +150,7 @@ class _KitchenState extends State<Kitchen>  {
                         valeur: RealValueGas,
                         photo: "images/fire.png",
                         couleur: KouleurGas,
-                        fonction: ()=>showToast(context),
+                        fonction: ()=>showToast(context,"What do you expect me to do ?","Sorry"),
                       ),
                       ComponentsCreator(
                         contenu: "Buzzer",
@@ -162,7 +160,7 @@ class _KitchenState extends State<Kitchen>  {
                         fonction: () async {
                           if(bizo)
                           {
-                            showToast(context);
+                            showToast(context,"You can't activate me","Okay");
                           }
                           else
                             {

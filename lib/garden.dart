@@ -125,17 +125,17 @@ class _GardenState extends State<Garden> {
                         valeur: RealValueTemp,
                         photo: "images/hot.png",
                         couleur: Colors.orangeAccent,
-                        fonction: ()=> showToast(context),
+                        fonction: ()=> showToast(context,"What do you expect me to do ?","Sorry"),
 
                       )
                     ],
                   ),
                   ComponentsCreator(
-                        contenu: "Fan",
+                        contenu: "Humidity",
                         valeur: RealValueHumidity,
                         photo: "images/humidity.png",
-                        couleur: Colors.purpleAccent,
-                        fonction: ()=> showToast(context),
+                        couleur: Colors.lightBlueAccent,
+                        fonction: ()=> showToast(context,"What do you expect me to do ?","Sorry"),
                       ),
                 ],
               ),
