@@ -19,8 +19,10 @@ class Kitchen extends StatefulWidget {
 class _KitchenState extends State<Kitchen>  {
 
 
+
   //buzzer Control
   bool bizo = true;
+  bool biza = true;
 
   //mes objets
   final firebaseController = Realtime();
@@ -150,7 +152,9 @@ class _KitchenState extends State<Kitchen>  {
                         valeur: RealValueGas,
                         photo: "images/fire.png",
                         couleur: KouleurGas,
-                        fonction: ()=>showToast(context,"What do you expect me to do ?","Sorry"),
+                        fonction: (){
+                          showToast(context,"What do you expect me to do ?","Sorry");
+                        },
                       ),
                       ComponentsCreator(
                         contenu: "Buzzer",
@@ -232,7 +236,6 @@ class _KitchenState extends State<Kitchen>  {
     else
       {
         bizo = true;
-        print("kkkkkkkkkkkkkkkkkkkkkkkk");
       }
 
   }
@@ -322,7 +325,18 @@ class _KitchenState extends State<Kitchen>  {
     String Temp = await firebaseController.getData("General","Temperature");
     String Gas  = await firebaseController.getData("Kitchen","Gas");
     String Buzzer = await firebaseController.getData("Kitchen","Buzzer");
-    if(Gas == "No") {Gas="No gas";} else {Gas="Gas !"; Kouleurgas= Colors.lightBlueAccent;}
+    if(Gas == "No")
+    {
+      Gas="No gas";
+      firebaseController.writeData("Kitchen", "Buzzer", "Off");
+    }
+    else
+      {
+        Gas="Gas !";
+        Kouleurgas= Colors.lightBlueAccent;
+        firebaseController.writeData("Kitchen", "Buzzer", "On");
+
+      }
     if(Buzzer == "On")
     {
       bizo = false;

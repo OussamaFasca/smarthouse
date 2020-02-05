@@ -21,8 +21,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           backgroundColor: KolorIOne,
           elevation: 0,
           title: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
+              Image(
+                width: 50,
+                color: Colors.white,
+                image: AssetImage("images/Logo.png"),
+              ),
               SimpleButtonCreator(
                 icone: Icons.close,
                 fonction: () => CreateAlertDialog(context),

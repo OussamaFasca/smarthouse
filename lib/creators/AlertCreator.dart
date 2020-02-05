@@ -1,20 +1,24 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 
-CreateAlertDialog(BuildContext context)
-{
+CreateAlertDialog(BuildContext context) {
   return showDialog(
     context: context,
     builder: (context) {
       return AlertDialog(
-        title: Text("You are about to exit the app, are you sure ?"),
+        title: Text(
+          "You are about to exit the app, are you sure ?",
+          style: TextStyle(
+            fontSize: 26,
+          ),
+        ),
         actions: <Widget>[
           MaterialButton(
             onPressed: () => exit(0),
             child: Text(
               "Yes",
               style: TextStyle(
-                color: Colors.blue,
+                color: Colors.red,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
@@ -24,7 +28,7 @@ CreateAlertDialog(BuildContext context)
             onPressed: () => Navigator.pop(context),
             child: Text("No",
                 style: TextStyle(
-                  color: Colors.redAccent,
+                  color: Colors.blue,
                   fontSize: 20,
                 )),
           ),
