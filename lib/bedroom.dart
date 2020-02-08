@@ -37,7 +37,7 @@ class _BedroomState extends State<Bedroom> {
   void initState() {
     // TODO: implement initState
     NetworkingInit();
-    final oneSec = const Duration(seconds: 2);
+    final oneSec = const Duration(milliseconds: 500);
     Timer.periodic(oneSec, (Timer t) => NetworkingInitNoAnimation());
 
     super.initState();

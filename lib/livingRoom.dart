@@ -20,14 +20,12 @@ class _LivingRoomState extends State<LivingRoom> {
   LoadingScreen loadingscreen = LoadingScreen();
 
   //Colors
-  Color KouleurLight = Colors.grey;
   Color KouleurServo = Colors.grey;
   Color KouleurFan = Colors.grey;
 
   bool visibility = false;
 
   //Real Values
-  String RealValueLight = "";
   String RealValueTemp = "";
   String RealValueServo = "";
   String RealValueFan = "";
@@ -37,7 +35,7 @@ class _LivingRoomState extends State<LivingRoom> {
   void initState() {
     // TODO: implement initState
     NetworkingInit();
-    final oneSec = const Duration(seconds: 2);
+    final oneSec = const Duration(milliseconds: 500);
     Timer.periodic(oneSec, (Timer t) => NetworkingInitNoAnimation());
 
     super.initState();
@@ -86,7 +84,7 @@ class _LivingRoomState extends State<LivingRoom> {
                     ),
                   ),
                   Text(
-                    "4 devices",
+                    "3 devices",
                     style: TextStyle(
                         fontSize: 20,
                         color: Colors.white,
@@ -106,19 +104,6 @@ class _LivingRoomState extends State<LivingRoom> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      ComponentsCreator(
-                        contenu: "Light",
-                        valeur: RealValueLight,
-                        photo: "images/idea.png",
-                        couleur: KouleurLight,
-                        fonction: () async {
-                          setState(() {
-                            visibility = true;
-                          });
-                          await NetworkingLight();
-                          NetworkingInit();
-                        },
-                      ),
                       ComponentsCreator(
                         contenu: "Temperature",
                         valeur: RealValueTemp,
@@ -168,17 +153,6 @@ class _LivingRoomState extends State<LivingRoom> {
     );
   }
 
-  void testAuxoLight(bool auxo) {
-    if (auxo) {
-      setState(() {
-        KouleurLight = Colors.amberAccent;
-      });
-    } else {
-      setState(() {
-        KouleurLight = Colors.grey;
-      });
-    }
-  }
 
   void testAuxoServo(bool auxo) {
     if (auxo) {
@@ -231,15 +205,6 @@ class _LivingRoomState extends State<LivingRoom> {
     });
   }
 
-  Future NetworkingLight() async {
-    bool auxo = await firebaseController.syncData("LivingRoom", "Light", "Off", "On");
-    String auxi = await firebaseController.getData("LivingRoom", "Light");
-    setState(() {
-      RealValueLight = auxi;
-      testAuxoLight(auxo);
-      visibility = false;
-    });
-  }
 
   void NetworkingInit() async {
     Color Kouleurservo = Colors.grey;
@@ -247,7 +212,6 @@ class _LivingRoomState extends State<LivingRoom> {
     setState(() {
       visibility = true;
     });
-    String Light = await firebaseController.getData("LivingRoom", "Light");
     String Temp = await firebaseController.getData("General", "Temperature");
     String Servo = await firebaseController.getData("LivingRoom", "Servo");
     String Fan = await firebaseController.getData("LivingRoom", "Fan");
@@ -259,13 +223,13 @@ class _LivingRoomState extends State<LivingRoom> {
     }
 
     setState(() {
-      testAuxoLight(convertToBool(Light, "On"));
+
       testAuxoServo(convertToBool(Servo, "90"));
       testAuxoFan(convertToBool(Fan, "On"));
       KouleurServo = Kouleurservo;
       RealValueServo = Servo;
       RealValueFan = Fan;
-      RealValueLight = Light;
+
       RealValueTemp = Temp;
       visibility = false;
     });
@@ -286,7 +250,6 @@ class _LivingRoomState extends State<LivingRoom> {
   void NetworkingInitNoAnimation() async {
     Color Kouleurservo = Colors.grey;
 
-    String Light = await firebaseController.getData("LivingRoom", "Light");
     String Temp = await firebaseController.getData("General", "Temperature");
     String Servo = await firebaseController.getData("LivingRoom", "Servo");
     String Fan = await firebaseController.getData("LivingRoom", "Fan");
@@ -298,13 +261,13 @@ class _LivingRoomState extends State<LivingRoom> {
     }
 
     setState(() {
-      testAuxoLight(convertToBool(Light, "On"));
+
       testAuxoServo(convertToBool(Servo, "90"));
       testAuxoFan(convertToBool(Fan, "On"));
       KouleurServo = Kouleurservo;
       RealValueServo = Servo;
       RealValueFan = Fan;
-      RealValueLight = Light;
+
       RealValueTemp = Temp;
       //visibility = false;
     });

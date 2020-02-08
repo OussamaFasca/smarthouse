@@ -46,11 +46,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               SizedBox(
                 width: 250.0,
                 child: ColorizeAnimatedTextKit(
-                    text: ["Smart", "House"],
+                    text: ["Soya", "Smart House"],
                     textStyle: TextStyle(
-                      fontSize: 45.0,
+                      fontSize: 40.0,
                       fontFamily: "Horizon",
-                      fontStyle: FontStyle.italic,
                       fontWeight: FontWeight.w300,
                     ),
                     colors: [

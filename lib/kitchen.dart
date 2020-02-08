@@ -30,7 +30,7 @@ class _KitchenState extends State<Kitchen>  {
 
 
   //Colors
-  Color KouleurLight= Colors.grey;
+
   Color KouleurBuzzer= Colors.grey;
   Color KouleurGas= Colors.grey;
 
@@ -39,7 +39,7 @@ class _KitchenState extends State<Kitchen>  {
   bool listner = false;
 
   //Real Values
-  String RealValueLight = "";
+
   String RealValueTemp ="";
   String RealValueBuzzer="";
   String RealValueGas="";
@@ -53,7 +53,7 @@ class _KitchenState extends State<Kitchen>  {
     // TODO: implement initState
     NetworkingInit();
 
-    final oneSec = const Duration(seconds: 1);
+    final oneSec = const Duration(milliseconds: 500);
     Timer.periodic(oneSec, (Timer t) => NetworkingInitNoAnimation());
 
     super.initState();
@@ -102,7 +102,7 @@ class _KitchenState extends State<Kitchen>  {
                     ),
                   ),
                   Text(
-                    "4 devices",
+                    "3 devices",
                     style: TextStyle(
                         fontSize: 20,
                         color: Colors.white,
@@ -122,19 +122,6 @@ class _KitchenState extends State<Kitchen>  {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      ComponentsCreator(
-                        contenu: "Light",
-                        valeur: RealValueLight,
-                        photo: "images/idea.png",
-                        couleur: KouleurLight,
-                        fonction: () async {
-                          setState(() {
-                            visibility = true;
-                          });
-                          await NetworkingLight();
-                          NetworkingInit();
-                        },
-                      ),
                       ComponentsCreator(
                         contenu: "Temperature",
                         valeur: RealValueTemp,
@@ -187,17 +174,6 @@ class _KitchenState extends State<Kitchen>  {
     );
   }
 
-  void testAuxoLight(bool auxo) {
-    if (auxo) {
-      setState(() {
-        KouleurLight = Colors.amberAccent;
-      });
-    } else {
-      setState(() {
-        KouleurLight = Colors.grey;
-      });
-    }
-  }
   void testAuxoBuzzer(bool auxo) {
     if (auxo) {
       setState(() {
@@ -221,8 +197,8 @@ class _KitchenState extends State<Kitchen>  {
     }
   }
 
-  Future NetworkingBuzzer() async {
-
+  Future NetworkingBuzzer() async
+  {
     String auxi = await firebaseController.getData("Kitchen","Buzzer");
     if(auxi == "On")
       {
@@ -237,7 +213,6 @@ class _KitchenState extends State<Kitchen>  {
       {
         bizo = true;
       }
-
   }
 
   Future NetworkingGas() async {
@@ -261,16 +236,6 @@ class _KitchenState extends State<Kitchen>  {
   }
 
 
-  Future NetworkingLight() async {
-    bool auxo = await firebaseController.syncData("Kitchen","Light","Off","On");
-    String auxi = await firebaseController.getData("Kitchen","Light");
-    setState(() {
-      RealValueLight = auxi;
-      testAuxoLight(auxo);
-      visibility = false;
-    });
-  }
-
   void NetworkingInit() async {
 
     Color Kouleurgas = Colors.grey;
@@ -278,7 +243,7 @@ class _KitchenState extends State<Kitchen>  {
     setState(() {
       visibility = true;
     });
-    String Light = await firebaseController.getData("Kitchen","Light");
+
     String Temp = await firebaseController.getData("General","Temperature");
     String Gas  = await firebaseController.getData("Kitchen","Gas");
     String Buzzer = await firebaseController.getData("Kitchen","Buzzer");
@@ -294,13 +259,13 @@ class _KitchenState extends State<Kitchen>  {
 
 
     setState(() {
-      testAuxoLight(convertToBool(Light, "On"));
+
       testAuxoBuzzer(convertToBool(Buzzer, "On"));
       testAuxoGas(convertToBool(Gas, "Yes"));
       KouleurGas = Kouleurgas ;
       RealValueBuzzer = Buzzer;
       RealValueGas = Gas;
-      RealValueLight = Light;
+
       RealValueTemp = Temp;
       visibility = false;
     });
@@ -321,7 +286,7 @@ class _KitchenState extends State<Kitchen>  {
 
     Color Kouleurgas = Colors.grey;
 
-    String Light = await firebaseController.getData("Kitchen","Light");
+
     String Temp = await firebaseController.getData("General","Temperature");
     String Gas  = await firebaseController.getData("Kitchen","Gas");
     String Buzzer = await firebaseController.getData("Kitchen","Buzzer");
@@ -348,13 +313,12 @@ class _KitchenState extends State<Kitchen>  {
 
 
     setState(() {
-      testAuxoLight(convertToBool(Light, "On"));
+
       testAuxoBuzzer(convertToBool(Buzzer, "On"));
       testAuxoGas(convertToBool(Gas, "Yes"));
       KouleurGas = Kouleurgas ;
       RealValueBuzzer = Buzzer;
       RealValueGas = Gas;
-      RealValueLight = Light;
       RealValueTemp = Temp;
     });
   }

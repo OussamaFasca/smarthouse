@@ -21,14 +21,12 @@ class _GardenState extends State<Garden> {
   final firebaseController = Realtime();
   LoadingScreen loadingscreen = LoadingScreen();
 
-  //Colors
-  Color KouleurLight = Colors.grey;
 
 
   bool visibility = false;
 
   //Real Values
-  String RealValueLight = "";
+
   String RealValueTemp = "";
   String RealValueHumidity = "";
 
@@ -37,7 +35,7 @@ class _GardenState extends State<Garden> {
   void initState() {
     // TODO: implement initState
     NetworkingInit();
-    final oneSec = const Duration(seconds: 2);
+    final oneSec = const Duration(milliseconds: 500);
     Timer.periodic(oneSec, (Timer t) => NetworkingInitNoAnimation());
 
     super.initState();
@@ -87,7 +85,7 @@ class _GardenState extends State<Garden> {
                     ),
                   ),
                   Text(
-                    "3 devices",
+                    "2 devices",
                     style: TextStyle(
                         fontSize: 20,
                         color: Colors.white,
@@ -108,35 +106,22 @@ class _GardenState extends State<Garden> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       ComponentsCreator(
-                        contenu: "Light",
-                        valeur: RealValueLight,
-                        photo: "images/idea.png",
-                        couleur: KouleurLight,
-                        fonction: () async {
-                          setState(() {
-                            visibility = true;
-                          });
-                          await NetworkingLight();
-                          NetworkingInit();
-                        },
-                      ),
-                      ComponentsCreator(
                         contenu: "Temperature",
                         valeur: RealValueTemp,
                         photo: "images/hot.png",
                         couleur: Colors.orangeAccent,
                         fonction: ()=> showToast(context,"What do you expect me to do ?","Sorry"),
-
-                      )
-                    ],
-                  ),
-                  ComponentsCreator(
+                      ),
+                      ComponentsCreator(
                         contenu: "Humidity",
                         valeur: RealValueHumidity,
                         photo: "images/humidity.png",
                         couleur: Colors.lightBlueAccent,
                         fonction: ()=> showToast(context,"What do you expect me to do ?","Sorry"),
                       ),
+                    ],
+                  ),
+
                 ],
               ),
             ),
@@ -146,40 +131,19 @@ class _GardenState extends State<Garden> {
     );
   }
 
-  void testAuxoLight(bool auxo) {
-    if (auxo) {
-      setState(() {
-        KouleurLight = Colors.amberAccent;
-      });
-    } else {
-      setState(() {
-        KouleurLight = Colors.grey;
-      });
-    }
-  }
-
-  Future NetworkingLight() async {
-    bool auxo = await firebaseController.syncData("Garden", "Light", "Off", "On");
-    String auxi = await firebaseController.getData("Garden", "Light");
-    setState(() {
-      RealValueLight = auxi;
-      testAuxoLight(auxo);
-      visibility = false;
-    });
-  }
 
   void NetworkingInit() async {
 
     setState(() {
       visibility = true;
     });
-    String Light = await firebaseController.getData("Garden", "Light");
+
     String Temp = await firebaseController.getData("General", "Temperature");
     String Humidity = await firebaseController.getData("Garden", "Humidity");
 
     setState(() {
-      testAuxoLight(convertToBool(Light, "On"));
-      RealValueLight = Light;
+
+
       RealValueTemp = Temp;
       RealValueHumidity = Humidity;
       visibility = false;
@@ -200,13 +164,11 @@ class _GardenState extends State<Garden> {
 
   void NetworkingInitNoAnimation() async {
 
-    String Light = await firebaseController.getData("Garden", "Light");
+
     String Temp = await firebaseController.getData("General", "Temperature");
     String Humidity = await firebaseController.getData("Garden", "Humidity");
 
     setState(() {
-      testAuxoLight(convertToBool(Light, "On"));
-      RealValueLight = Light;
       RealValueTemp = Temp;
       RealValueHumidity = Humidity;
     });
